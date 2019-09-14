@@ -9,44 +9,55 @@ public class Movement : MonoBehaviour
     const int RUN_SPEED = 3;
 
     bool onLadder = false;
+    public GameObject playerPrefab;
+    List<GameObject> players = new List<GameObject>();
+    List<Rigidbody2D> bodys = new List<Rigidbody2D>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+    foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){
+    players.Add (player);
+    Rigidbody2D r = player.GetComponent<Rigidbody2D>();
+    bodys.Add(r);
+    }   
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (transform.position.y < GROUND_LEVEL_Y)
+        if (Input.GetKey("a")) //player 1 left
         {
-            transform.position.y = GROUND_LEVEL_Y;
-        }*/
-
-        Rigidbody2D rbody = gameObject.GetComponent<Rigidbody2D>();
-
-        if (Input.GetKey("a") || Input.GetKey("left"))
-        {
-            // transform.Translate(Vector2.left * Time.deltaTime * RUN_SPEED);
-            rbody.velocity = Vector2.left * RUN_SPEED;
+            bodys[0].velocity = Vector2.left * RUN_SPEED;
         }
-        else if (Input.GetKey("d") || Input.GetKey("right"))
+        if (Input.GetKey("d")) //player 1 right
         {
-            // transform.Translate(Vector2.right * Time.deltaTime * RUN_SPEED);
-            rbody.velocity = Vector2.right * RUN_SPEED;
+           bodys[0].velocity = Vector2.right * RUN_SPEED;
         }
-        else if (onLadder)
+        if (Input.GetKey("left"))//player 2 left
         {
-            if (Input.GetKey("w") || Input.GetKey("up"))
+            bodys[1].velocity = Vector2.left * RUN_SPEED;
+        }
+        if (Input.GetKey("right"))//player 2 right
+        {
+            bodys[1].velocity = Vector2.right * RUN_SPEED;
+        }
+        if (onLadder)
+        {
+            if (Input.GetKey("w"))//player 1 up
             {
-                // transform.Translate(Vector2.up * Time.deltaTime * RUN_SPEED);
-                rbody.velocity = Vector2.up * RUN_SPEED;
+                bodys[0].velocity = Vector2.up * RUN_SPEED;
             }
-            else if ((Input.GetKey("s") || Input.GetKey("down")) && transform.position.y > GROUND_LEVEL_Y)
+            if (Input.GetKey("s") && transform.position.y > GROUND_LEVEL_Y)//player 1 down
             {
-                // transform.Translate(Vector2.down * Time.deltaTime * RUN_SPEED);
-                rbody.velocity = Vector2.down * RUN_SPEED;
+                bodys[0].velocity = Vector2.down * RUN_SPEED;
+            }
+            if (Input.GetKey("up"))//plauer 2 up
+            {
+                bodys[1].velocity = Vector2.up * RUN_SPEED;
+            }
+            if (Input.GetKey("down") && transform.position.y > GROUND_LEVEL_Y)//player 2 down
+            {
+                bodys[1].velocity = Vector2.down * RUN_SPEED;
             }
         }
 

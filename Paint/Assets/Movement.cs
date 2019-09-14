@@ -46,17 +46,15 @@ public class Movement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         onLadder = true;
-        print(onLadder);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        print(onLadder);
+        onLadder = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         onLadder = false;
-        print(onLadder);
     }
 }

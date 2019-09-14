@@ -15,11 +15,11 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-    foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){
-    players.Add (player);
-    Rigidbody2D r = player.GetComponent<Rigidbody2D>();
-    bodys.Add(r);
-    }   
+        foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){
+            players.Add (player);
+            Rigidbody2D r = player.GetComponent<Rigidbody2D>();
+            bodys.Add(r);
+        }   
     }
 
     // Update is called once per frame
@@ -61,12 +61,12 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (!onLadder && transform.position.y > GROUND_LEVEL_Y)
+        if (!onLadder && transform.position.y > GROUND_LEVEL_Y)//gravity 
         {
             transform.Translate(Vector2.down * Time.deltaTime * 5);
         }
-    }
 
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         onLadder = true;
@@ -82,3 +82,4 @@ public class Movement : MonoBehaviour
         onLadder = false;
     }
 }
+

@@ -21,7 +21,7 @@ public class TriggerCollision : MonoBehaviour
         if (Input.GetKey("left shift") && player.transform.position.y <= Movement.GROUND_LEVEL_Y)
         {
             // Make ladder susceptible to pushing
-            print("On ground and pushing");
+            //print("On ground and pushing");
             collider.isTrigger = false;
         } else
         {

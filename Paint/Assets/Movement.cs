@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    const int GROUND_LEVEL_Y = 1;
+    public const int GROUND_LEVEL_Y = 1;
 
     const int RUN_SPEED = 3;
 
@@ -19,23 +19,34 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*if (transform.position.y < GROUND_LEVEL_Y)
+        {
+            transform.position.y = GROUND_LEVEL_Y;
+        }*/
+
+        Rigidbody2D rbody = gameObject.GetComponent<Rigidbody2D>();
+
         if (Input.GetKey("a") || Input.GetKey("left"))
         {
-            transform.Translate(Vector2.left * Time.deltaTime * RUN_SPEED);
+            // transform.Translate(Vector2.left * Time.deltaTime * RUN_SPEED);
+            rbody.velocity = Vector2.left * RUN_SPEED;
         }
         else if (Input.GetKey("d") || Input.GetKey("right"))
         {
-            transform.Translate(Vector2.right * Time.deltaTime * RUN_SPEED);
+            // transform.Translate(Vector2.right * Time.deltaTime * RUN_SPEED);
+            rbody.velocity = Vector2.right * RUN_SPEED;
         }
         else if (onLadder)
         {
             if (Input.GetKey("w") || Input.GetKey("up"))
             {
-                transform.Translate(Vector2.up * Time.deltaTime * RUN_SPEED);
+                // transform.Translate(Vector2.up * Time.deltaTime * RUN_SPEED);
+                rbody.velocity = Vector2.up * RUN_SPEED;
             }
             else if ((Input.GetKey("s") || Input.GetKey("down")) && transform.position.y > GROUND_LEVEL_Y)
             {
-                transform.Translate(Vector2.down * Time.deltaTime * RUN_SPEED);
+                // transform.Translate(Vector2.down * Time.deltaTime * RUN_SPEED);
+                rbody.velocity = Vector2.down * RUN_SPEED;
             }
         }
 

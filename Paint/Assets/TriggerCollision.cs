@@ -16,8 +16,9 @@ public class TriggerCollision : MonoBehaviour
     void Update()
     {
         Collider2D collider = gameObject.GetComponent<Collider2D>();
+        Rigidbody2D rbody = gameObject.GetComponent<Rigidbody2D>();
 
-        if (Input.GetKey("left shift") && player.transform.position.y <= 1)
+        if (Input.GetKey("left shift") && player.transform.position.y <= Movement.GROUND_LEVEL_Y)
         {
             // Make ladder susceptible to pushing
             print("On ground and pushing");
@@ -25,6 +26,7 @@ public class TriggerCollision : MonoBehaviour
         } else
         {
             collider.isTrigger = true;
+            rbody.velocity = Vector2.zero;
         }
     }
 }

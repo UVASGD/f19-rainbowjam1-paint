@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    const int GROUND_LEVEL_Y = 1;
+
+    bool onLadder = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +25,38 @@ public class Movement : MonoBehaviour
         {
             transform.Translate(Vector2.right * Time.deltaTime);
         }
+        else if (onLadder)
+        {
+            if (Input.GetKey("w") || Input.GetKey("up"))
+            {
+                transform.Translate(Vector2.up * Time.deltaTime);
+            }
+            else if ((Input.GetKey("s") || Input.GetKey("down")) && transform.position.y > GROUND_LEVEL_Y)
+            {
+                transform.Translate(Vector2.down * Time.deltaTime);
+            }
+        }
+
+        if (!onLadder && transform.position.y > GROUND_LEVEL_Y)
+        {
+            transform.Translate(Vector2.down * Time.deltaTime * 3);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        onLadder = true;
+        print(onLadder);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        print(onLadder);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        onLadder = false;
+        print(onLadder);
     }
 }
